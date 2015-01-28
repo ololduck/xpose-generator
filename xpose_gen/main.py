@@ -5,6 +5,7 @@ import codecs
 import shutil
 from markdown import Markdown
 from jinja2 import Template
+from zipfile import ZipFile
 
 site_template = Template(u'''
 <!doctype html>
@@ -54,6 +55,15 @@ exts = ['markdown.extensions.' + ext
                     'meta', 'sane_lists']]
 
 
+def zipit(inpath='build', title=None):
+    "zips a directory to title.zip. Every file will be in the zipfile as"
+    "title/filename"
+    with ZipFile(str(title) + '.zip', 'w') as zipf:
+        for fname in os.listdir(inpath):
+            zipf.write(os.path.sep.join([inpath, fname]),
+                       os.path.sep.join([str(title), fname]))
+
+
 def copy_ressources(frompath='content', to='build', types=r'png|jpg|gif'):
     "Copy everything where the filename matches param types"
     for fname in os.listdir(frompath):
@@ -97,12 +107,15 @@ def gen():
                          'w+',
                          encoding='utf-8') as f:
             f.write(real_html)
+    pathed_title = a.title.lower().replace(' ', '_')
+    return re.sub('[\'\"\?,:]', '', pathed_title)
 
 
 def main():
-    gen()
+    pathed_title = gen()
     copy_ressources()
-    shutil.copy2('a', os.path.sep.join(['content', 'a']))
+    shutil.copy2('a', os.path.sep.join(['build', 'a']))
+    zipit('build', pathed_title)
 
 if __name__ == '__main__':
     main()
