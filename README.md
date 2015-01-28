@@ -46,6 +46,7 @@ Also, even if you don't want to merge you code, an email will be appreciated.
 * Add support for custom css
 * do not hard-code everything; add support for cli args, or conffile
 * Decrease every header if a `# title` is detected.
+* Generate the zip file
 
 
 [1]: http://www-igm.univ-mlv.fr/~dr/xall.php

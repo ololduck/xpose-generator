@@ -2,9 +2,9 @@
 import os
 import re
 import codecs
+import shutil
 from markdown import Markdown
 from jinja2 import Template
-import shutil
 
 site_template = Template(u'''
 <!doctype html>
@@ -34,6 +34,7 @@ site_template = Template(u'''
 
 
 class A(object):
+    "Contains the information give by dr's `a` file."
     def __init__(self, fname='a'):
         with codecs.open(fname, encoding='utf-8') as f:
             self.a = f.read()
@@ -43,13 +44,18 @@ class A(object):
         self.classifiers = t[2:]
 
 
+# Regex for markdown files
 content_file_re = re.compile(r'[A-Za-z0-9\-_]+\.md')
+
+# See the python-markdown documentation on the syntax provided by these
+# markdown extensions
 exts = ['markdown.extensions.' + ext
         for ext in ['extra', 'admonition', 'codehilite', 'headerid',
                     'meta', 'sane_lists']]
 
 
 def copy_ressources(frompath='content', to='build', types=r'png|jpg|gif'):
+    "Copy everything where the filename matches param types"
     for fname in os.listdir(frompath):
         if not re.match(".*\.(" + types + ")", fname):
             continue
@@ -57,13 +63,14 @@ def copy_ressources(frompath='content', to='build', types=r'png|jpg|gif'):
         shutil.copy2(path, os.path.sep.join([to, fname]))
 
 
-def main():
+def gen():
+    "generate that shit"
     files = []
     md = Markdown(extensions=exts, output_format='html5')
     for path in os.listdir(os.path.sep.join([os.getcwd(), 'content'])):
         if not content_file_re.match(path):
             continue
-        p = os.path.sep.join(os.path.join([os.getcwd(), "content", path]))
+        p = os.path.sep.join([os.getcwd(), "content", path])
         with codecs.open(p, encoding='utf-8') as f:
             content = f.read()
         html = md.convert(content)
@@ -77,7 +84,6 @@ def main():
                                'title': match.group(2)})
         files.append({'path': path, 'title': md.Meta['title'][0],
                       'headers': titles, 'html': html})
-    print(files)
     a = A()
     for d in files:
         real_html = site_template.render(site_title=a.title,
@@ -91,7 +97,12 @@ def main():
                          'w+',
                          encoding='utf-8') as f:
             f.write(real_html)
+
+
+def main():
+    gen()
     copy_ressources()
+    shutil.copy2('a', os.path.sep.join(['content', 'a']))
 
 if __name__ == '__main__':
     main()
