@@ -115,7 +115,7 @@ def _get_files_info(frompath):
             logging.warn("No NavOrder set for file %s. Navigation menu may be"
                          " erronous. See documentation." % fdict['path'])
         else:
-            fdict.update('order', md.Meta['navorder'])
+            fdict.update({'order': md.Meta['navorder'][0]})
         files.append(fdict)
     return files
 

@@ -67,6 +67,8 @@ Also, even if you don't want to merge your code, an email will be appreciated.
 * do not hard-code everything; add support for cli args, or conffile
 * Decrease every header if a `# title` is detected.
 * Use the generated `h1` title as page's title, and strip it from final HTML.
+* Add `next` and `prev` buttons on every page, linking to the next page in
+  NavOrder.
 
 
 [1]: http://www-igm.univ-mlv.fr/~dr/xall.php
