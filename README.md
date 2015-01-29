@@ -28,7 +28,7 @@ don't write `<h1>` tags, aka `#`, in markdown.
 Here be samples (and dragons):
 
     Title: This is my test page
-    Order: 1
+    NavOrder: 1
     ## Hello, world
 
     Hello, world. I am writing some stuff in markdown.
@@ -52,7 +52,7 @@ To have more information about how to write markdown, check [github's guide to
 markdown][3]. This will give you the basis. To know more about the supported
 syntax, see the documentation of [python-markdown][4]. The following extensions
 are used: [extra][5], [admonition][6], [codehilite][7], [headerid][8],
-['sane_lists'][9]
+[sane_lists][9]
 
 # Contributing
 
