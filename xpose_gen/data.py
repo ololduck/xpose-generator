@@ -21,7 +21,7 @@ univ-mlv.fr/~dr/XPOSE/style.css"/>
 <h2>{{page.title}}</h2>
 <ul>
 {% for header in page.headers %}
-<li><a href={{page.path}}#{{header.id}}>{{header.title}}</a></li>
+<li><a href={{page.html_path}}#{{header.id}}>{{header.title}}</a></li>
 {% endfor %}
 </ul>
 {% endfor %}

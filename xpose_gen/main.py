@@ -110,7 +110,8 @@ def _get_files_info(frompath):
                           % path)
             sys.exit(1)
         fdict = {'path': path, 'title': md.Meta['title'][0],
-                 'headers': titles, 'html': html}
+                 'headers': titles, 'html': html,
+                 'html_path': re.sub('\.md', '.html', path)}
         if "navorder" not in md.Meta:
             logging.warn("No NavOrder set for file %s. Navigation menu may be"
                          " erronous. See documentation." % fdict['path'])
