@@ -8,13 +8,12 @@ It is very simple: it takes the information describe in `a`, a text file
 containing meta-information, and every markdown file it finds in `content`, and
 generates the proper html tree in `build`.
 
-## Installation
+## Installation / Upgrade
 
-    git clone <url_of_the_git_repository_you_are_viewing_this_file_on>
-    cd xpose-generator
-    pip install .
+    pip install -U xpose-generator
 
-Once this is done, you can call `xposegen`, in the directory of your choice.
+Once this is done, you can call `xposegen`, in the directory of your choice,
+where there is a [`a`][2] file, and a `content/` directory.
 
 ## How to write content:
 
@@ -23,7 +22,7 @@ instructions [here][2].
 
 Simply write a .md file in `content/`, write a line `Title: My Title Here` on
 top of the file, and then write your content. Note: For presentation purpose,
-don't write `<h1>` tags, aka `#`, in markdown. 
+don't write `h1` tags, aka `#`, in markdown. 
 
 Here be samples (and dragons):
 
@@ -63,10 +62,11 @@ Also, even if you don't want to merge your code, an email will be appreciated.
 
 ## TODO
 
-* Support directory use in `content/`
+* Support subdirectory use in `content/`
 * Add support for custom css
 * do not hard-code everything; add support for cli args, or conffile
 * Decrease every header if a `# title` is detected.
+* Use the generated `h1` title as page's title, and strip it from final HTML.
 
 
 [1]: http://www-igm.univ-mlv.fr/~dr/xall.php
@@ -78,3 +78,6 @@ Also, even if you don't want to merge your code, an email will be appreciated.
 [7]: http://pythonhosted.org//Markdown/extensions/code_hilite.html
 [8]: http://pythonhosted.org//Markdown/extensions/header_id.html
 [9]: http://pythonhosted.org//Markdown/extensions/sane_lists.html
+
+<!-- vim: tw=80:spell:spelllang=en
+-->
