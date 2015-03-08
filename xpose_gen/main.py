@@ -11,6 +11,7 @@ from zipfile import ZipFile
 from errno import EEXIST
 from .data import codehilite_css, admonition_css, template_string
 
+
 logging.basicConfig()
 
 
@@ -99,7 +100,7 @@ def _get_files_info(frompath):
         html = md.convert(content)
         titles = []
         h2_re = re.compile(
-            r'<h2 id="([a-z0-9\-]+)">([_a-zA-Z0-9\-\ \!\,]+)</h2>')
+            r'<h2 id="([a-z0-9\-]+)">([_a-zA-Z0-9\- !,\.]+)</h2>')
         for line in html.splitlines():
             match = h2_re.match(line)
             if match:
